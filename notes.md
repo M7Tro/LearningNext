@@ -127,3 +127,12 @@ You can nest several components together if you want. Just pass the single top-l
 
 
 Chapter 6: Displaying data with props. 
+
+
+...
+
+
+I have actually completed everything until chapter 10 but lost it because did not commit properly. Commit size reached more than 100MB and I just decided to clone what I have and continue learning. 
+
+Chapter 10: 
+
