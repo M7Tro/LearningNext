@@ -134,5 +134,30 @@ Chapter 6: Displaying data with props.
 
 I have actually completed everything until chapter 10 but lost it because did not commit properly. Commit size reached more than 100MB and I just decided to clone what I have and continue learning. 
 
-Chapter 10: 
+Chapter 10: Server and Client Components
 
+Server and client environments. 
+
+The client refers to the browser on a user's device that sends a request to the server. 
+
+The server refers to the computer in a data center that stores your application code, receives requests from a client, does some computation, and sends back an appropriate response. 
+
+Each environment has its own set of capabilities and constraints. 
+
+By moving rendering and data fetching to the server, you can redue the amount of code sent to the client, which can improve your application's performance. But, to make your UI more interactive, you need to update the DOM on the client. 
+
+Network boundary is a conceptual line that separates the different environments. 
+
+In React, we choose where to place network boundary in your component tree. You can fetch data and render  a user's post on the server (using server components), then render the interactive LikeButton for ecah post on the client. 
+
+You can create a Nav component that is rendered on the server and shared across pages, but if you want to show an active state for links, you can render the list of Links on  the client. 
+
+Behind the scenes, the components are split into module graphs. The server module graph contains all the server components that are rendered on the server. The client module graph contains all the components rendered on the client. 
+
+After server components are rendered, a special data format called the React Server Component Payload (RSC) is sent to the client. The RSC paylaod contains:
+    The rendered result of server components.
+    Placholders (or holes) for where client components should be rendered and references to their javascript files. 
+
+React uses this information to consolidate server and client components and update the DOM on the client. 
+
+NextJS uses server components by default. 
