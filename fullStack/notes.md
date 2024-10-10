@@ -146,3 +146,50 @@ To hide the image on smaller screens, the followind tailwind css is added: class
 
 
 Note that images without dimensions and web fonts are a common cause of the layout shift.
+
+
+
+
+Chapter 4: Creating Layouts and Pages 
+
+So far, the application only has one home page. You can create more routes with layouts and pages. 
+
+Nested routing:
+
+    Next.js uses file-system routing where folders are used to create nested routes. Each folder represents a route segment that maps to a URL segment. 
+
+    You can create separate UIs for each route using layout.tsx and page.tsx files. 
+
+    Page.tsx is a special NextJS file that exprts a React component and it's required for the route to be accessible. 
+
+    Right now, we already have a page file /app/page.tsx. This is the home page associated with the route '/'
+
+    To create a nested route, you can add nested folders with files page.tsx inside them. 
+
+    For example, you can create a page at route '/dashboard' by adding folder 'dashboard' inside app and adding file 'page.jsx' inside dashboard folder.
+
+    page.jsx is supposed to return a Page() component.
+
+    Because the page files in NextJS are given special names, you can colocate different logic/test files/components/etc. with the page file. Those files will not be reachable. 
+
+    Only the content inside the page.jsx file is publically accessible. 
+
+    For example, the lib and ui folders are colocated inside the app folder. They themselves contain no page.jsx files and are not reachable with a url in the browser. 
+
+
+layout.tsx:
+
+    In NextJS, you can create UI that is accessible by many pages using layout.tsx.
+
+    The layout.tsx export defaults a component Layout that received a {children} prop for type {children: React.ReactNode}
+
+    One of the benefits of using layout.tsx is that on change of route only the components that must be changed will chage: the layout is not re-rendered. This is called partial rendering. 
+
+    Basically, the essence of layout.tsx is to share UI across different pages.
+
+Root layout:
+
+    There is a special type of layout called Root layout. It is contained in the layout.tsx of the app folder. The root layout is required. Any UI added to the root layout will be shared across all pages in the application. 
+
+    Root layout is convenient for modifying html, body or adding metadata.
+
