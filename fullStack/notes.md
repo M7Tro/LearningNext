@@ -100,3 +100,49 @@ You can apply conditional styleing with clsx like this:
 
 Other styling solutions include Sass and CSS-in-JS libraries like styled-jsx, etc.
 
+
+
+
+Chapter 3: Optimizing Fonts and Images
+
+Fonts can make website significantly more attractive, but the font files sould be easily accessible. 
+
+When fonts on a website are changed after initial render with default font, it might shoft the layout of a website. Cumulative Layout Shift is a metric used by Google to evaluate the performance and user experience of a website. 
+
+Next.js automatically optimizes fonts in the application when you use next/font module. It downloads font-files at build time and hosts them with other static assets. This way, there are no network requests when user visist the application. 
+
+next/font module is similar to other modules I have used before like react-font. 
+
+You just import fonts from there and use them. 
+
+import {Inter} from 'next/font/google';
+
+export const inter = Inter({subsets: ['latin']});
+
+Then you go to layout.tsx and add className = {`${inter.className} antialised`} to the body tag so that the font is applied to the whole body. 
+
+
+
+The <Image> component:
+
+Next.js can server static assets like images under the top-level folder /public.
+
+Files inside /public can be referenced inside the application. 
+
+Adding HTML images manually, you will have to make sure the image is responsive do different sizes, prevent layout shift, etc.
+
+The <Image> component is an extention of the <img> tag that handles several things for you: prevents layout shift, resize the images, etc.
+
+In the public folder, there are the now two images: hero image for desktop and hero image for mobile.
+
+To use the Image component, you need to import it from 'next/image': 
+    import Image from 'next/image'
+
+To access images stored directly inside public folder, like when you use src, just write src = "/image-name.png". The public folder will be looked at automatically. 
+
+It is a good practice to explicitly set width and height of the image to avoid layout shift.
+
+To hide the image on smaller screens, the followind tailwind css is added: className = "hidden md:block"
+
+
+Note that images without dimensions and web fonts are a common cause of the layout shift.
