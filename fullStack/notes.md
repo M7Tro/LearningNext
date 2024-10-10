@@ -193,3 +193,43 @@ Root layout:
 
     Root layout is convenient for modifying html, body or adding metadata.
 
+
+
+
+
+Chapter 5: Navigating Between Pages 
+
+    Traditionally, to link between pages you would use the html <a> tag. 
+
+    The problem with <a> tags is that there is a full page refresh on every click. 
+
+    In NextJS, you can use <Link> to navigate between pages in the application. 
+
+    <Link> lets you implement client-side navigation with JavaScript. 
+
+    To implement the <Link> component in the current application, go to /app/ui/dashboard/nav-links.tsx and replace the <a> tags with <Link>
+
+    Import the Link component from "next/link"
+
+    The Link tag is similar to a in terms of the attributes you specify. It also uses the "href" attribute. And if you are mapping links/urls from an array, don't forget to add the "key" property. 
+
+    NextJS implements a mechanism called "route splitting". Unlike a traditional React spa that loads the whole application and throws error if one of the pages is somehow incorrect, NextJS isolates code of eac page that corresponds to a different route. If some page produces a malfunction, the rest of the application will still work. 
+
+    Also, whenever a <Link> tag appears in the browser's viewport, NextJS prefetches the code for the page so when user presses the links the code is ready to be displayed. 
+
+
+Showing active links:
+
+    A common pattern is to show a user what page they are currently on by showing the active link.
+
+    To do this, you need to access user's current URL. Next.js provides a hook called usePathname() that lets you check the user's path.
+
+    Since usePathName is a hook, you must implement the nav-links.tsx as a client component. 
+
+    So just add React's directive "use client"; 
+    
+    usePathname is accessible from next/navigation module.
+
+    After adding "use client"; you should restart the dev server or it will still show you the error of using a hook in a server component.
+
+    clsx can be used to apply conditional styling and highlight the active link.
