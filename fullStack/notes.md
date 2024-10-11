@@ -264,3 +264,76 @@ The script in route.ts uses SQL to create tables, and data from placeholder-data
 While running the development server, navigate into localhost:3000/seed
 
 You must see a message that the database was seeded successfully. After that, you can delete the file. 
+
+You can check the data from Vercel's website. You can even run SQL queries to get data. 
+
+
+
+
+
+Chapter 7: Fetching Data 
+
+Now that we have data stored in the databse, what are the ways we can get the data and use it in our application?
+
+API layer:
+
+    APIs are an intermediary layer between your application code and database. 
+
+    You will often use an API when relying on some 3rd party services that provide an API 
+
+    When fetching data from client, you would want to have an API layer that runs on the server to avoid exposing database secrets to the client 
+
+    In Next.js, you can create API endpoints using Route Handlers.
+
+    Route handlers are only available inside the "app" directory. They are the equivalent of API Routes inside the "pages" directory. 
+
+
+Database queries:
+
+    When creating a full-stack application, you will probably need to write logic to interact with the database. 
+
+    If you are using React Server Components (fetching data on server), you can skip the API layer, and query the database directly without exposing database secrets to the client. 
+
+    Rule: do not expose the database secrets by querying the database directly on the client.
+
+
+Using server components to fetch data:
+
+    By default, NextJS uses React Server Components to fetch data. 
+
+    Server components let you use promises and async/await without relying on hooks like useState and useEffect.
+
+    Server Components execute on the server, so you can isolate complex logic and data feching on server and send only the result to the client. 
+
+    As Server Components execute on the server, you do not need to use an API layer to send queries to the server. 
+
+
+Using SQL:
+
+    For this dashboard project, queries will be made using the Vercel's postresql SDK and SQL. 
+
+    Why do we use SQL?
+
+    SQL is the industry standard for querying relational databases.
+
+    Knowledge of SQL provides foundational understanding of relational databases. 
+
+    SQL is versatile and lets you fetch and manipulate specific data. 
+
+    Vercel's Postresql provides protection against SQL injections. 
+
+    To query the database, import the "sql" function from "@vercel/postres"
+
+    This "sql" function can be used inside any server component. 
+
+    SQL is good for fetching and manipulating specific data 
+
+
+
+Note that "@" at the beginning of each import path is a shortcut alias that is automatically set up by NextJS for the root directoty of the project.
+
+An interesting thing about the Page() component code snippet from the tutorial is that it is an async component:
+    export default async function Page() {}
+
+This way, you can use await inside of it. The dashboard has three components inside of it that request data. 
+
