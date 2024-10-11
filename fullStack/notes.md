@@ -337,3 +337,12 @@ An interesting thing about the Page() component code snippet from the tutorial i
 
 This way, you can use await inside of it. The dashboard has three components inside of it that request data. 
 
+
+
+Fetching LatestInvoices:
+
+    While it is possible to fetch necessary data and sort it with JavaScript, it might get very verbose.
+
+    That is why using SQL queries might be a much better/cleaner option.
+
+    For the next step, we get 5 latest invoices sorted by date. 
