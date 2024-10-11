@@ -233,3 +233,34 @@ Showing active links:
     After adding "use client"; you should restart the dev server or it will still show you the error of using a hook in a server component.
 
     clsx can be used to apply conditional styling and highlight the active link.
+
+
+
+
+Chapter 6: settig up your database
+
+For the tutorial, PostreSQL will be used as a database. 
+
+You can set it up using @vercel/postgres 
+
+I connected my github account to Vercel.com and chose the fullstack folder from learninNext repository. 
+
+
+To use postresql, install @vercel/postgresql sdk with pnpm  
+
+
+After tahat, we shall seed the database: add some initial data.
+
+Inside of /app, there is a folder called "seed". It contains a the file route.ts. It is a Next.js Route Handler. 
+
+NextJS request handlers let you have custom request handlers for a giver route. 
+
+By convention, request handlers are defined in route.ts file inside /app. 
+
+Uncommenting the route.ts file inside /app creates a request handler that populates the database. 
+
+The script in route.ts uses SQL to create tables, and data from placeholder-data.ts to populate the tables later. 
+
+While running the development server, navigate into localhost:3000/seed
+
+You must see a message that the database was seeded successfully. After that, you can delete the file. 
