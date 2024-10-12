@@ -346,3 +346,76 @@ Fetching LatestInvoices:
     That is why using SQL queries might be a much better/cleaner option.
 
     For the next step, we get 5 latest invoices sorted by date. 
+
+
+There are a few things to be aware of:
+
+    The data requests are unintentionally blocking each other. It creates a request waterfall. 
+
+    By default, NextJS pre-renders routes to improve performance. This is called Static Rendering. If your data changes, it won't be reflected in the dashboard. 
+
+
+Note: there is an interesting way of passing SQL commands being used. It relies on backticks ``:
+    const invoiceCountPromise = sql`SELECT COUNT(*) FROM invoices`;
+
+What are request Waterfalls:
+
+    A "waterfall" refers to a sequence of request that depend on the completion of each other. 
+
+    In case of data fetching, each request can only begin when the other one is finished. 
+
+    This is not necessarily bad: you might want data fetching to execute sequentially. 
+
+
+Parallel data fetching:
+
+    Common way to avoid waterfalls is to initiate requests simultaneously/in parallel.
+
+    In JavaScript, you can use Promise.all() to initiate several requests together. 
+
+    Promise.all() accepts an array of functions that return a promise. You can pass it a bunch of commands like const invoiceCountPromise = sql`SELECT COUNT(*) FROM invoices`;   
+
+    const data = Promise.all([]) results in an array data that contains the response of each promise that are accessible with [] subscript operator.
+
+    The problem with that approach is that Promise.all() will wait for every promise to resolve/reject and one request might be significantly slower that others.
+
+
+
+
+Chapter 8: Static and dynamic rendering
+
+    Currently, there are two setbacks to the way the data is fetched on the dashboard page. 
+
+    There is a request waterfall, where each request must be initiate after completion of the previous one. 
+
+    The dashboard is static: changes in data will not be reflected on the page. 
+
+
+Whati is Static Rendering:
+
+    with static rendering, data fetching and rendering happens during build time (when you deploy) or when validating data.
+
+    Whenever a user visits your page, the cached result is served. There are a couple of benefits to static rendering:
+
+        faster websites - prerendered content can be cached and globally distributed. 
+
+        Reduced server load - because the server is cached (stored), the server does not need to make requests on every request of a user. 
+
+        SEO - prerendered content is easier for search engine crawlers to index. 
+
+    Static rendering is useful for UI with no data or data that is shared across users: static blog post or a product page. Not a good fit for a dashboard that must have data reguarly updated. 
+
+    The opposite of static rendering is dynamic rendering.
+
+Dynamic rendering:
+
+    With dynamic rendering, the content is rendered on the server for each user at request time. There are several benefits:
+
+        Real-time data
+
+        User-specific content: it is easier to serve personalized content with dynamically rendered components 
+
+        Request time information: dynamic rendering allows you to access data that is only accessible in request time, like cookies or URL search parameters 
+
+        
+
